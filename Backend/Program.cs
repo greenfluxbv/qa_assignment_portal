@@ -47,7 +47,7 @@ builder.Services.AddIdentityCore<AppUser>()
 builder.Services.AddCors(
     options => options.AddPolicy(
         "wasm",
-        policy => policy.WithOrigins([builder.Configuration["BackendUrl"] ?? "https://localhost:5001", 
+        policy => policy.WithOrigins([builder.Configuration["BackendUrl"] ?? "https://localhost:", 
             builder.Configuration["FrontendUrl"] ?? "https://localhost:5002"])
             .AllowAnyMethod()
             .AllowAnyHeader()
@@ -61,16 +61,13 @@ builder.Services.AddOpenApiDocument();
 
 var app = builder.Build();
 
-if (builder.Environment.IsDevelopment())
-{
-    // Seed the database
-    await using var scope = app.Services.CreateAsyncScope();
-    await SeedData.InitializeAsync(scope.ServiceProvider);
+// Seed the database
+await using var scope = app.Services.CreateAsyncScope();
+await SeedData.InitializeAsync(scope.ServiceProvider);
 
-    // Add OpenAPI/Swagger generator and the Swagger UI
-    app.UseOpenApi();
-    app.UseSwaggerUi(); // UseSwaggerUI Protected by if (env.IsDevelopment())
-}
+// Add OpenAPI/Swagger generator and the Swagger UI
+app.UseOpenApi();
+app.UseSwaggerUi(); // UseSwaggerUI Protected by if (env.IsDevelopment())
 
 // Create routes for the identity endpoints
 app.MapIdentityApi<AppUser>();
@@ -101,7 +98,7 @@ app.MapPost("/logout", async (SignInManager<AppUser> signInManager, [FromBody] o
     return Results.Unauthorized();
 }).RequireAuthorization();
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.MapGet("/roles", (ClaimsPrincipal user) =>
 {

@@ -1,0 +1,27 @@
+﻿[
+  {
+    "name": "Amsterdam, Joan Muyskenweg 22",
+    "state": "Charging",
+    "capacity": "11"
+  },
+  {
+    "name": "Amsterdam, Mauritskade 64",
+    "state": "Idle",
+    "capacity": "11"
+  },
+  {
+    "name": "Muiden, Pampus",
+    "state": "Charging",
+    "capacity": "32"
+  },
+  {
+    "name": "Rotterdam, Maasvlakte 2",
+    "state": "Charging",
+    "capacity": "12.000"
+  },
+  {
+    "name": "Wervershoof, De Ambtenaar",
+    "state": "Idle",
+    "capacity": "80"
+  }
+]

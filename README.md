@@ -1,41 +1,47 @@
-# Standalone Blazor WebAssembly with ASP.NET Core Identity
+# Portal QA Automation Engineer assignment
 
-This sample app demonstrates how to use the built-in ASP.NET Core Identity capabilities from a standalone Blazor WebAssembly app.
+Hi!
 
-For more information, see [Secure ASP.NET Core Blazor WebAssembly with ASP.NET Core Identity](https://learn.microsoft.com/aspnet/core/blazor/security/webassembly/standalone-with-identity).
+We would like to understand your approach to writing automated tests, so that's why we ask you to do this assignment. 
 
-## Steps to run the sample
+We will evaluate your code on structuring, readability and maintanability. During the interview we will have a short talk about your code too.
 
-1. Clone this repository or download a ZIP archive of the repository. For more information, see [How to download a sample](https://learn.microsoft.com/aspnet/core/introduction-to-aspnet-core#how-to-download-a-sample).
+## Objective
 
-1. The default and fallback URLs for the two apps are:
+### Introduction
 
-   * `Backend` app (`BackendUrl`): `https://localhost:7211` (fallback: `https://localhost:5001`)
-   * `BlazorWasmAuth` app (`FrontendUrl`): `https://localhost:7171` (fallback: `https://localhost:5002`)
-   
-   You can use the existing URLs or update them in the `appsettings.json` file of each project with new `BackendUrl` and `FrontendUrl` endpoints:
+Please write a test automation using PlayWright for a demo application. It is up to you to use either C# or TypeScript.
 
-   * `appsettings.json` file in the root of the `Backend` app.
-   * `wwwroot/appsettings.json` file in the `BlazorWasmAuth` app.
-  
-1. If you plan to run the apps using the .NET CLI with `dotnet run`, note that first launch profile in the launch settings file is used to run an app, which is the insecure `http` profile (HTTP protocol). To run the apps securely (HTTPS protocol), take ***either*** of the following approaches:
+> This demo application is a modified version of the Blazor with Local Identity demo. The original can be found here:   [Secure ASP.NET Core Blazor WebAssembly with ASP.NET Core Identity](https://learn.microsoft.com/aspnet/core/blazor/security/webassembly/standalone-with-identity).
 
-   * Pass the launch profile option to the command when running the apps: `dotnet run -lp https`.
-   * In the launch settings files (`Properties/launchSettings.json`) ***of both projects***, rotate the `https` profiles to the top, placing them above the `http` profiles.
-  
-   If you use Visual Studio to run the apps, Visual Studio automatically uses the `https` launch profile. No action is required to run the apps securely when using Visual Studio.
 
-1. Run the `Backend` and `BlazorWasmAuth` apps.
+### Requirements
+ - Cover at least 3 scenarios.
+   - It is (almost, see below) up to you which scenarios to cover.
+ - At least one scenario should test the [data processing](http://localhost:5170/data-processing) form.
+   - The data processing form returns the lenght of the input provided.
+   - This form only works when the user is authenticated. See [authentication](#authentication) for the standard logins.
+ 
+ - It is up to you to decide on the other scenarios.
+   - Note that you can test for example both positive and negative paths.
 
-1. Navigate to the `BlazorWasmAuth` app at the `FrontendUrl`.
+### Deliverable
 
-1. Register a new user using the **Register** link in the upper-right corner of the app's UI or use one of the preregistered test users:
+Please send us back the complete source code, preferrably as a Git repository. You could send us a zipped archive or invite us to a private GitHub repository. Sharing your solution publicly on the internet will disqualify your submission. Please include this Readme.md file in your submission.
 
-   * `leela@contoso.com` (Password: `Passw0rd!`). Leela has `Administrator`, `Manager`, and `User` roles and can access the private manager page but not the private editor page of the app. She can process data with both forms on the data processing page.
-   * `harry@contoso.com` (Password: `Passw0rd!`). Harry only has the `User` role and can't access the manager and editor pages. He can only process data with the first form on the data processing page.
+Last but not least, we should be able to compile and run your tests.
 
-1. Log in with the user.
+## Steps to run the demo
 
-1. Navigate to the private page (`Components/Pages/PrivatePage.razor` at `/private-page`) that only authenticated users can reach. A link to the page appears in the navigation sidebar after the user is authenticated. Navigate to the private manager and editor pages to explore how the user's roles influence the pages that they can visit. Navigate to the data processing page (`Components/Pages/DataProcessing.razor` at `/data-processing`) to experience authenticated and authorized data processing web API calls.
+1. Run the demo application by using the included [`docker-compose`](compose.yaml)  file
+    1. Docker needs to be installed on your system.
+    1. From the root of the project, run `docker-compose up`
+    1. You can browse the application at [http://localhost:5170](http://localhost:5170)
 
-1. Log out of the app.
+### Authentication
+
+Whenever an user is authenticated, some more functionality becomes available. 
+
+* `admin@greenflux.com` (Password: `Passw0rd!`). Admin has `Administrator`, `Manager`, and `User` roles and can access the private manager page but not the private editor page of the app. She can process data with both forms on the data processing page.
+* `user@greenflux.com` (Password: `Passw0rd!`). This user only has the `User` role and can't access the manager and editor pages. He can only process data with the first form on the data processing page.
+

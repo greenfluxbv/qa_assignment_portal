@@ -1,0 +1,53 @@
+﻿@page "/charge-stations"
+@inject HttpClient Http
+
+<PageTitle>Chargestations</PageTitle>
+
+<h1>Chargestations</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (chargeStations == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Capacity</th>
+                <th>State</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var chargeStation in chargeStations)
+            {
+                <tr>
+                    <td>@chargeStation.Name</td>
+                    <td>@chargeStation.Capacity</td>
+                    <td>@chargeStation.State</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    private ChargeStation[]? chargeStations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        chargeStations = await Http.GetFromJsonAsync<ChargeStation[]>("sample-data/charge-stations.json");
+    }
+
+    public class ChargeStation
+    {
+        public string? State { get; set; }
+
+        public string? Name { get; set; }
+
+        public string? Capacity { get; set; }
+    }
+}

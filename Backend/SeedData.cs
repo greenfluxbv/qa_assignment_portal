@@ -10,19 +10,19 @@ public class SeedData
     [
         new SeedUser()
         {
-            Email = "leela@contoso.com", 
-            NormalizedEmail = "LEELA@CONTOSO.COM", 
-            NormalizedUserName = "LEELA@CONTOSO.COM", 
+            Email = "admin@greenflux.com", 
+            NormalizedEmail = "ADMIN@GREENFLUX.COM", 
+            NormalizedUserName = "ADMIN@GREENFLUX.COM", 
             RoleList = [ "Administrator", "Manager" ], 
-            UserName = "leela@contoso.com"
+            UserName = "admin@greenflux.com"
         },
         new SeedUser()
         {
-            Email = "harry@contoso.com",
-            NormalizedEmail = "HARRY@CONTOSO.COM",
-            NormalizedUserName = "HARRY@CONTOSO.COM",
+            Email = "user@greenflux.com",
+            NormalizedEmail = "USER@GREENFLUX.COM",
+            NormalizedUserName = "USER@GREENFLUX.COM",
             RoleList = [ "User" ],
-            UserName = "harry@contoso.com"
+            UserName = "user@greenflux.com"
         },
     ];
 
